@@ -7,13 +7,9 @@ import java.util.List;
 @Table(name = "T_USER")
 public class User {
 
-    public User(String username, String first_name, String last_name) {
-        this.username = username;
-        this.first_name = first_name;
-        this.last_name = last_name;
-    }
 
-    @Id@Column(name ="ID")
+    @Id
+    @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
@@ -38,7 +34,67 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Comment> comments;
 
-    public User() {
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getFirst_name() {
+        return first_name;
+    }
+
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
+    }
+
+    public String getLast_name() {
+        return last_name;
+    }
+
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
+
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }
