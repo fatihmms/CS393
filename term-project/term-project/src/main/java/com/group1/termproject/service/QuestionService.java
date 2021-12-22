@@ -10,4 +10,5 @@ public interface QuestionService {
     List<Question> findAll();
     List<Question> findByTag(String tag);
     Question save(Question q);
+    List<QuestionDTO> questionToDto(List<Question> q);
 }

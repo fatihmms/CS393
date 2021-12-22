@@ -6,8 +6,6 @@ import com.group1.termproject.model.Question;
 import com.group1.termproject.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -27,21 +25,12 @@ public class QuestionController {
     @GetMapping
     public List<QuestionDTO> getAll(){
         List<Question> questions = questionService.findAll();
-        List<QuestionDTO> questionDTOS = new ArrayList<>();
-        for (Question q: questions) {
-            questionDTOS.add(questionMapper.INSTANCE.questionToDTO(q));
-        }
-        return questionDTOS;
-
+        return questionService.questionToDto(questions);
     }
 
     @GetMapping("/{tag}")
     public List<QuestionDTO> getByTag(@PathVariable("tag") String tag){
         List<Question> questions = questionService.findByTag(tag);
-        List<QuestionDTO> questionDTOS = new ArrayList<>();
-        for (Question q: questions) {
-            questionDTOS.add(questionMapper.INSTANCE.questionToDTO(q));
-        }
-        return questionDTOS;
+        return questionService.questionToDto(questions);
     }
 }
