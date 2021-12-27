@@ -4,6 +4,7 @@ import com.group1.termproject.DTO.QuestionDTO;
 import com.group1.termproject.DTO.QuestionPostDTO;
 import com.group1.termproject.mapper.QuestionMapper;
 import com.group1.termproject.model.Question;
+import com.group1.termproject.repository.QuestionRepository;
 import com.group1.termproject.service.QuestionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,6 +23,9 @@ public class QuestionController {
     QuestionService questionService;
 
     QuestionMapper questionMapper;
+
+    @Autowired
+    QuestionRepository questionRepository;
 
     @PostMapping
     public Question saveQuestion(@RequestBody QuestionPostDTO q){
@@ -48,5 +52,14 @@ public class QuestionController {
     public QuestionDTO getById(@PathVariable("id") int id){
         Question q = questionService.getById(id);
         return questionService.singleQuestionToDto(q);
+    }
+
+    @DeleteMapping("deleteById/{id}")
+    public void deleteAnswer(@PathVariable("id") int id){
+        Question question = questionRepository.getById(id);
+        question.setAnswers(null);
+        question.setOwnerUser(null);
+        question.setComments(null);
+        questionRepository.deleteById(question.getId());
     }
 }

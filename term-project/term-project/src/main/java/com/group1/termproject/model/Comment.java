@@ -19,7 +19,7 @@ public class Comment {
 
 
 
-    @Column(name = "VOTE")
+    @Column(name = "VOTE", columnDefinition = "integer default 0")
     private int vote;
 
     @ManyToOne(cascade = CascadeType.ALL)
