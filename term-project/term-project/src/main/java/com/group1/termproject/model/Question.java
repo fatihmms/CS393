@@ -3,6 +3,7 @@ package com.group1.termproject.model;
 import javax.persistence.*;
 import javax.websocket.OnError;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 @Entity
@@ -20,15 +21,13 @@ public class Question {
     private String title;
 
     @Column(name = "DATE")
+    @Temporal(TemporalType.DATE)
     private Date askedDate;
 
-    @Column(name = "COUNT_OF_DISLIKE")
-    private int dislike;
+    @Column(name = "VOTE", columnDefinition = "integer default 0 ")
+    private int vote;
 
-    @Column(name = "COUNT_OF_LIKE")
-    private int like;
-
-    @Column(name = "DESCRIPTION")
+    @Column(name = "TEXT")
     private String description;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -73,22 +72,6 @@ public class Question {
         this.askedDate = askedDate;
     }
 
-    public int getDislike() {
-        return dislike;
-    }
-
-    public void setDislike(int dislike) {
-        this.dislike = dislike;
-    }
-
-    public int getLike() {
-        return like;
-    }
-
-    public void setLike(int like) {
-        this.like = like;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -120,4 +103,14 @@ public class Question {
     public void setAnswers(List<Answer> answers) {
         this.answers = answers;
     }
+
+    public int getVote() {
+        return vote;
+    }
+
+    public void setVote(int vote) {
+        this.vote = vote;
+    }
+
+
 }
