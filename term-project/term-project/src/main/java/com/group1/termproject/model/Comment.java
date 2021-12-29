@@ -1,5 +1,7 @@
 package com.group1.termproject.model;
 
+import org.springframework.data.jpa.repository.Query;
+
 import javax.persistence.*;
 import java.util.Date;
 

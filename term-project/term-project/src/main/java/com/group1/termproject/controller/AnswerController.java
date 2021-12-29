@@ -8,6 +8,7 @@ import com.group1.termproject.repository.AnswerRepository;
 import com.group1.termproject.service.AnswerService;
 import com.group1.termproject.service.QuestionService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,7 @@ public class AnswerController {
     @Autowired
     AnswerRepository answerRepository;
 
+    @ApiOperation()
     @PostMapping
     public Answer saveAnswer(@RequestBody AnswerDTO answerDTO){
         return answerService.save(answerDTO);
