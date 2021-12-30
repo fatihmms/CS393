@@ -60,4 +60,14 @@ public class QuestionServiceImpl implements QuestionService {
     public QuestionDTO singleQuestionToDto(Question q) {
         return questionMapper.INSTANCE.questionToDTO(q);
     }
+
+    @Override
+    public Question update(int id, QuestionPostDTO q) {
+        Question question = questionRepository.getById(id);
+        question.setTitle(q.getTitle());
+        question.setDescription(q.getText());
+        return questionRepository.save(question);
+    }
+
+
 }

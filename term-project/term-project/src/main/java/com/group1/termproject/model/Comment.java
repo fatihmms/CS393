@@ -17,7 +17,7 @@ public class Comment {
     private String context;
 
     @Column(name = "DATE")
-    private Date date;
+    private Date date = new Date();
 
 
 

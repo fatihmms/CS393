@@ -4,7 +4,7 @@ public class AnswerDTO {
 
     private String text;
     private String answeredBy;
-    private int questionID;
+
 
     public String getText() {
         return text;
@@ -22,11 +22,5 @@ public class AnswerDTO {
         this.answeredBy = answeredBy;
     }
 
-    public int getQuestionID() {
-        return questionID;
-    }
 
-    public void setQuestionID(int questionID) {
-        this.questionID = questionID;
-    }
 }

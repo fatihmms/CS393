@@ -16,7 +16,7 @@ public class Answer {
     private String content;
 
     @Column(name = "date")
-    private Date answeringDate;
+    private Date answeringDate = new Date();
 
     @Column(name = "VOTE", columnDefinition = "integer default 0")
     private int vote;

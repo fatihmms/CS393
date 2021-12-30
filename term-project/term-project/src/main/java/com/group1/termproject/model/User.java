@@ -1,7 +1,12 @@
 package com.group1.termproject.model;
 
+import io.swagger.annotations.ApiOperation;
+
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 @Entity
 @Table(name = "T_USER")

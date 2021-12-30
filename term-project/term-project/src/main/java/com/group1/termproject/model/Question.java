@@ -22,7 +22,7 @@ public class Question {
 
     @Column(name = "DATE")
     @Temporal(TemporalType.DATE)
-    private Date askedDate;
+    private Date askedDate = new Date();
 
     @Column(name = "VOTE", columnDefinition = "integer default 0 ")
     private int vote;

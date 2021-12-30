@@ -4,7 +4,6 @@ public class CommentToQuestionDTO {
 
     private String commentedBy;
     private String context;
-    private int questionID;
 
     public String getCommentedBy() {
         return commentedBy;
@@ -22,11 +21,5 @@ public class CommentToQuestionDTO {
         this.context = context;
     }
 
-    public int getQuestionID() {
-        return questionID;
-    }
 
-    public void setQuestionID(int questionID) {
-        this.questionID = questionID;
-    }
 }

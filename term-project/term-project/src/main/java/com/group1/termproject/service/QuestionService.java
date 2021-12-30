@@ -14,6 +14,6 @@ public interface QuestionService {
     Question save(QuestionPostDTO q);
     List<QuestionDTO> questionToDto(List<Question> q);
     QuestionDTO singleQuestionToDto(Question q);
-
+    Question update(int id, QuestionPostDTO q);
 
 }

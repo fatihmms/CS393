@@ -4,5 +4,5 @@ import com.group1.termproject.DTO.AnswerDTO;
 import com.group1.termproject.model.Answer;
 
 public interface AnswerService {
-    Answer save(AnswerDTO answerDTO);
+    Answer save(int id, AnswerDTO answerDTO);
 }

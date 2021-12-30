@@ -28,19 +28,19 @@ public class CommentServiceImpl implements CommentService{
     CommentMapper commentMapper;
 
     @Override
-    public Comment saveForQuestion(CommentToQuestionDTO commentToQuestionDTO) {
+    public Comment saveForQuestion(int id, CommentToQuestionDTO commentToQuestionDTO) {
         Comment comment = commentMapper.INSTANCE.dtoToCommentForQuestion(commentToQuestionDTO);
-        comment.setQuestion(questionRepository.getById(commentToQuestionDTO.getQuestionID()));
+        comment.setQuestion(questionRepository.getById(id));
         comment.setUser(userRepository.findByUsername(commentToQuestionDTO.getCommentedBy()));;
         return commentRepository.save(comment);
     }
 
     @Override
-    public Comment saveForAnswer(CommentToAnswerDTO commentToAnswerDTO){
+    public Comment saveForAnswer(int id, CommentToAnswerDTO commentToAnswerDTO){
         Comment comment = commentMapper.INSTANCE.dtoToCommentForAnswer(commentToAnswerDTO);
-        comment.setAnswer(answerRepository.getById(commentToAnswerDTO.getAnswerID()));
+        comment.setAnswer(answerRepository.getById(id));
         comment.setUser(userRepository.findByUsername(commentToAnswerDTO.getCommentedBy()));
-        comment.setQuestion(answerRepository.getById(commentToAnswerDTO.getAnswerID()).getQuestion());
+        comment.setQuestion(answerRepository.getById(id).getQuestion());
         return commentRepository.save(comment);
     }
 }
