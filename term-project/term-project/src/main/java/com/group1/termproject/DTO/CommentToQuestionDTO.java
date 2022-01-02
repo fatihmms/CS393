@@ -2,16 +2,16 @@ package com.group1.termproject.DTO;
 
 public class CommentToQuestionDTO {
 
-    private String commentedBy;
+    //private String commentedBy;
     private String context;
 
-    public String getCommentedBy() {
+    /*public String getCommentedBy() {
         return commentedBy;
     }
 
     public void setCommentedBy(String commentedBy) {
         this.commentedBy = commentedBy;
-    }
+    }*/
 
     public String getContext() {
         return context;

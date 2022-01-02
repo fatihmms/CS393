@@ -13,9 +13,9 @@ public class QuestionDTO {
     private String title;
     private String description;
     private String tag;
-    private Date date;
+
     private int vote;
-    private String askedBy;
+    //private String askedBy;
 
     public String getTitle() {
         return title;
@@ -33,21 +33,14 @@ public class QuestionDTO {
         this.description = description;
     }
 
-    public String getTags() {
+    public String getTag() {
         return tag;
     }
 
-    public void setTags(String tags) {
+    public void setTag(String tag) {
         this.tag = tag;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
 
     public int getVote() {
         return vote;
@@ -57,11 +50,11 @@ public class QuestionDTO {
         this.vote = vote;
     }
 
-    public String getAskedBy() {
+    /*public String getAskedBy() {
         return askedBy;
     }
 
     public void setAskedBy(String askedBy) {
         this.askedBy = askedBy;
-    }
+    }*/
 }

@@ -6,6 +6,6 @@ import com.group1.termproject.model.Comment;
 
 public interface CommentService {
 
-    Comment saveForQuestion(int id, CommentToQuestionDTO commentToQuestionDTO);
-    Comment saveForAnswer(int id, CommentToAnswerDTO commentToQuestionDTO);
+    CommentToQuestionDTO saveForQuestion(int id, CommentToQuestionDTO commentToQuestionDTO);
+    CommentToAnswerDTO saveForAnswer(int id, CommentToAnswerDTO commentToQuestionDTO);
 }

@@ -39,7 +39,7 @@ public class AnswerController {
                     "change the question ID")})
 
     @PostMapping("/{questionId}")
-    public Answer saveAnswer(@PathVariable("questionId") int id ,@RequestBody AnswerDTO answerDTO){
+    public AnswerDTO saveAnswer(@PathVariable("questionId") int id ,@RequestBody AnswerDTO answerDTO){
         return answerService.save(id, answerDTO);
     }
 
@@ -51,8 +51,8 @@ public class AnswerController {
             @ApiResponse(code = 200, message = "Answer is deleted"),
             @ApiResponse(code = 404, message = "Answer can not be found, " +
                     "change the answer ID")})
-    @DeleteMapping("deleteById/{id}")
-    public void deleteAnswer(@PathVariable("id") int id){
+    @DeleteMapping("/{questionId}")
+    public void deleteAnswer(@PathVariable("questionId") int id){
         Answer answer = answerRepository.getById(id);
         answer.setUser(null);
         answer.setQuestion(null);

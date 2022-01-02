@@ -1,10 +1,12 @@
-1- Swaggerı çalıştırmayı öğren projeye implement et
-2- Controller ve service layerları yazmaya başla
-3- DTO yu  nasıl kullanacağını öğren
 
-ONEMLİ
 
-Date i otomatik olarak nasıl create edebilirsin???
-Delete metodlarını kontrol edeceksin hocaya da sorabilirsin
-Soru: Question silmeye çalışırken altındaki answer ve commentleri de silmeliyim
-bunu nasıl yapabilirim??
+
+1- Silme metodları düzeltilecek-->onun için önce 5i yap
+2- Sadece DTO return edilecek(post metodlarını düzelt) (yapıldı, kontrol et)
+3- URL isimlerini düzelt
+4- datayı düzelt
+5- question ın answer ve comment sayıları döndürülecek bundan dolayı listeye eklenecek
+6- askedBy lar int yapılıp id alınacak
+7- modeller düzeltilebilir mi kontrol et
+8- tagler liste haline getirilecek
+

@@ -31,7 +31,7 @@ public class CommentController {
             @ApiResponse(code = 404, message = "Question can not be found, " +
                     "change the question ID")})
     @PostMapping("/toQuestion/{questionId}")
-    public Comment saveCommentForQuestion(@PathVariable("questionId") int id,@RequestBody CommentToQuestionDTO commentToQuestionDTO){
+    public CommentToQuestionDTO saveCommentForQuestion(@PathVariable("questionId") int id,@RequestBody CommentToQuestionDTO commentToQuestionDTO){
         return commentService.saveForQuestion(id, commentToQuestionDTO);
     }
 
@@ -43,7 +43,7 @@ public class CommentController {
             @ApiResponse(code = 404, message = "Answer can not be found, " +
                     "change the answer ID")})
     @PostMapping("/toAnswer/{answerId}")
-    public Comment saveCommentForAnswer(@RequestBody CommentToAnswerDTO commentToAnswerDTO, @PathVariable("answerId") int id){
+    public CommentToAnswerDTO saveCommentForAnswer(@RequestBody CommentToAnswerDTO commentToAnswerDTO, @PathVariable("answerId") int id){
         return commentService.saveForAnswer(id, commentToAnswerDTO);
     }
 
@@ -54,7 +54,7 @@ public class CommentController {
             @ApiResponse(code = 200, message = "Comment is deleted"),
             @ApiResponse(code = 404, message = "Comment can not be found, " +
                     "change the comment ID")})
-    @DeleteMapping("deleteById/{id}")
+    @DeleteMapping("/{id}")
     public void deleteComment(@PathVariable("id") int id){
         Comment comment = commentRepository.getById(id);
         comment.setQuestion(null);
@@ -71,7 +71,7 @@ public class CommentController {
             @ApiResponse(code = 200, message = "Comment is liked"),
             @ApiResponse(code = 400, message = "Comment cannot be found, change the comment ID")
     })
-    @PutMapping("votes/{id}/1")
+    @PutMapping("/{id}/votes/like")
     public int voteU(@PathVariable("id") int id){
         Comment comment = commentRepository.getById(id);
         comment.setVote(comment.getVote() + 1);
@@ -87,7 +87,7 @@ public class CommentController {
             @ApiResponse(code = 200, message = "Comment is disliked"),
             @ApiResponse(code = 400, message = "Comment cannot be found, change the comment ID")
     })
-    @PutMapping("votes/{id}/2")
+    @PutMapping("/{id}/votes/dislike")
     public int voteD(@PathVariable("id") int id){
         Comment comment = commentRepository.getById(id);
         comment.setVote(comment.getVote() - 1);

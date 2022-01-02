@@ -3,7 +3,7 @@ package com.group1.termproject.DTO;
 public class CommentToAnswerDTO {
 
     private String context;
-    private String commentedBy;
+    //private String commentedBy;
 
 
     public String getContext() {
@@ -14,13 +14,13 @@ public class CommentToAnswerDTO {
         this.context = context;
     }
 
-    public String getCommentedBy() {
+    /*public String getCommentedBy() {
         return commentedBy;
     }
 
     public void setCommentedBy(String commentedBy) {
         this.commentedBy = commentedBy;
-    }
+    }*/
 
 
 }

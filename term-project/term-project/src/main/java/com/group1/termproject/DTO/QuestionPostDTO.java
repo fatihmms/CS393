@@ -11,17 +11,11 @@ public class QuestionPostDTO {
     private String title;
     private String text;
     private String tag;
-    private String askedBy;
+    //private String askedBy;
 
-    private Date date;
 
-    public Date getDate() {
-        return date;
-    }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+
 
     public String getTitle() {
         return title;
@@ -47,11 +41,11 @@ public class QuestionPostDTO {
         this.tag = tag;
     }
 
-    public String getAskedBy() {
+    /*public String getAskedBy() {
         return askedBy;
     }
 
     public void setAskedBy(String askedBy) {
         this.askedBy = askedBy;
-    }
+    }*/
 }

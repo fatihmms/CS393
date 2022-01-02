@@ -26,12 +26,13 @@ public class AnswerServiceImpl implements AnswerService{
     AnswerMapper answerMapper;
 
     @Override
-    public Answer save(int id, AnswerDTO answerDTO) {
+    public AnswerDTO save(int id, AnswerDTO answerDTO) {
         Answer answer = answerMapper.INSTANCE.dtoToAnswer(answerDTO);
         Question question = questionRepository.getById(id);
-        User user = userRepository.findByUsername(answerDTO.getAnsweredBy());
+        User user = userRepository.getById(id);
         answer.setQuestion(question);
         answer.setUser(user);
-        return answerRepository.save(answer);
+        answerRepository.save(answer);
+        return answerDTO;
     }
 }

@@ -33,10 +33,9 @@ public class QuestionController {
             value = "Saves a new question",
             notes = "Write the necessary properties for a question")
     @ApiResponse(code = 200, message = "Question is saved")
-    @PostMapping
-    public Question saveQuestion(@RequestBody QuestionPostDTO q){
-        Question question = questionMapper.INSTANCE.dtoToQuestion(q);
-        return questionService.save(q);
+    @PostMapping("{userId}")
+    public QuestionPostDTO saveQuestion(@PathVariable("userId") int id, @RequestBody QuestionPostDTO q){
+        return questionService.save(id, q);
     }
 
     @ApiOperation(

@@ -11,7 +11,7 @@ public interface AnswerMapper {
 
     AnswerMapper INSTANCE = Mappers.getMapper( AnswerMapper.class);
 
-    @Mapping(target = "answeredBy", expression = "java(answer.getUser().getUsername())")
+
     @Mapping(target = "text", source = "content")
     AnswerDTO answerToDTO(Answer answer);
 

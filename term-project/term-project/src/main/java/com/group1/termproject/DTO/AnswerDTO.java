@@ -3,7 +3,7 @@ package com.group1.termproject.DTO;
 public class AnswerDTO {
 
     private String text;
-    private String answeredBy;
+    //private String answeredBy;
 
 
     public String getText() {
@@ -14,13 +14,13 @@ public class AnswerDTO {
         this.text = text;
     }
 
-    public String getAnsweredBy() {
+    /*public String getAnsweredBy() {
         return answeredBy;
     }
 
     public void setAnsweredBy(String answeredBy) {
         this.answeredBy = answeredBy;
-    }
+    }*/
 
 
 }

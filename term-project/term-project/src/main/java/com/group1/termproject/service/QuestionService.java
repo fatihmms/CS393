@@ -11,7 +11,7 @@ public interface QuestionService {
     List<Question> findAll();
     List<Question> findByTag(String tag);
     Question getById(int id);
-    Question save(QuestionPostDTO q);
+    QuestionPostDTO save(int id, QuestionPostDTO q);
     List<QuestionDTO> questionToDto(List<Question> q);
     QuestionDTO singleQuestionToDto(Question q);
     Question update(int id, QuestionPostDTO q);

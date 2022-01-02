@@ -40,11 +40,12 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Question save(QuestionPostDTO q) {
+    public QuestionPostDTO save(int id, QuestionPostDTO q) {
         Question question = questionMapper.INSTANCE.dtoToQuestion(q);
-        User user = userRepository.findByUsername(q.getAskedBy());
+        User user = userRepository.getById(id);
         question.setOwnerUser(user);
-        return questionRepository.save(question);
+        questionRepository.save(question);
+        return q;
     }
 
     @Override

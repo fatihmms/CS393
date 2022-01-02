@@ -15,11 +15,9 @@ public interface QuestionMapper {
 
     QuestionMapper INSTANCE = Mappers.getMapper( QuestionMapper.class);
 
-    @Mapping(target = "date", source = "askedDate")
-    @Mapping(target = "askedBy", expression = "java(question.getOwnerUser().getUsername())")
+
     QuestionDTO questionToDTO (Question question);
 
     @Mapping(target = "description", source = "text")
-    @Mapping(target = "askedDate", source = "date")
     Question dtoToQuestion (QuestionPostDTO questionPostDTO);
 }

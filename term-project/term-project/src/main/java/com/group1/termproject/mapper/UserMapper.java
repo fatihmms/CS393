@@ -10,11 +10,11 @@ import org.mapstruct.factory.Mappers;
 public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper( UserMapper.class);
 
-    @Mapping(source = "first_name", target = "name")
+    /*@Mapping(source = "first_name", target = "name")
     @Mapping(source = "last_name", target =  "surname")
     UserDTO userToDto(User user);
 
     @Mapping(target = "first_name", source = "name")
     @Mapping(target = "last_name", source = "surname")
-    User dtoToUser(UserDTO userDTO);
+    User dtoToUser(UserDTO userDTO);*/
 }
