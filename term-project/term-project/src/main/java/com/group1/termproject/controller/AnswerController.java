@@ -38,9 +38,9 @@ public class AnswerController {
             @ApiResponse(code = 404, message = "Question can not be found, " +
                     "change the question ID")})
 
-    @PostMapping("/{questionId}")
-    public AnswerDTO saveAnswer(@PathVariable("questionId") int id ,@RequestBody AnswerDTO answerDTO){
-        return answerService.save(id, answerDTO);
+    @PostMapping("/question/{questionId}")
+    public AnswerDTO saveAnswer(@PathVariable("questionId") int questionId ,@RequestBody AnswerDTO answerDTO){
+        return answerService.save(questionId, answerDTO);
     }
 
     @ApiOperation(
@@ -51,12 +51,39 @@ public class AnswerController {
             @ApiResponse(code = 200, message = "Answer is deleted"),
             @ApiResponse(code = 404, message = "Answer can not be found, " +
                     "change the answer ID")})
-    @DeleteMapping("/{questionId}")
-    public void deleteAnswer(@PathVariable("questionId") int id){
-        Answer answer = answerRepository.getById(id);
-        answer.setUser(null);
-        answer.setQuestion(null);
-        answer.setComments(null);
-        answerRepository.deleteById(answer.getId());
+    @DeleteMapping("/{answerId}")
+    public void deleteAnswer(@PathVariable("answerId") int id){
+       answerService.delete(id);
+    }
+
+    @ApiOperation(
+            value = "Likes the specified answer",
+            notes = "Specify the answer ID to be liked"
+    )
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Answer is liked"),
+            @ApiResponse(code = 400, message = "Answer cannot be found, change the answer ID")
+    })
+    @PutMapping("/{id}/votes/like")
+    public int like(@PathVariable("id") int id){
+        return answerService.like(id);
+    }
+
+    @ApiOperation(
+            value = "Dislikes the specified answer",
+            notes = "Specify the answer ID to be disliked"
+    )
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Answer is disliked"),
+            @ApiResponse(code = 400, message = "Answer cannot be found, change the answer ID")
+    })
+    @PutMapping("/{id}/votes/dislike")
+    public int dislike(@PathVariable("id") int id){
+        return answerService.dislike(id);
+    }
+
+    @PutMapping("/{answerId}")
+    public AnswerDTO updateAnswer(@PathVariable("answerId") int id, @RequestBody AnswerDTO answerDTO){
+        return answerService.update(id, answerDTO);
     }
 }

@@ -10,8 +10,4 @@ import java.util.List;
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
-    @Query("select q from Question q where q.tag=?1")
-    List<Question> findByTag(String tag);
-
-
 }

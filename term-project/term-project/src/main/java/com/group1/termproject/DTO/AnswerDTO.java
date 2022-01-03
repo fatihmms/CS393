@@ -3,8 +3,16 @@ package com.group1.termproject.DTO;
 public class AnswerDTO {
 
     private String text;
-    //private String answeredBy;
+    private String usernameOfWriter;
 
+
+    public String getUsernameOfWriter() {
+        return usernameOfWriter;
+    }
+
+    public void setUsernameOfWriter(String usernameOfWriter) {
+        this.usernameOfWriter = usernameOfWriter;
+    }
 
     public String getText() {
         return text;
@@ -14,13 +22,6 @@ public class AnswerDTO {
         this.text = text;
     }
 
-    /*public String getAnsweredBy() {
-        return answeredBy;
-    }
-
-    public void setAnsweredBy(String answeredBy) {
-        this.answeredBy = answeredBy;
-    }*/
 
 
 }

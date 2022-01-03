@@ -20,8 +20,6 @@ public class CommentController {
     @Autowired
     CommentService commentService;
 
-    @Autowired
-    CommentRepository commentRepository;
 
     @ApiOperation(
             value = "Saves a new comment for a question",
@@ -30,9 +28,9 @@ public class CommentController {
             @ApiResponse(code = 200, message = "Received comments for questions are displayed"),
             @ApiResponse(code = 404, message = "Question can not be found, " +
                     "change the question ID")})
-    @PostMapping("/toQuestion/{questionId}")
-    public CommentToQuestionDTO saveCommentForQuestion(@PathVariable("questionId") int id,@RequestBody CommentToQuestionDTO commentToQuestionDTO){
-        return commentService.saveForQuestion(id, commentToQuestionDTO);
+    @PostMapping("/question/{questionId}")
+    public CommentToQuestionDTO saveCommentForQuestion(@PathVariable("questionId") int questionId,@RequestBody CommentToQuestionDTO commentToQuestionDTO){
+        return commentService.saveForQuestion(questionId,commentToQuestionDTO);
     }
 
     @ApiOperation(
@@ -42,9 +40,9 @@ public class CommentController {
             @ApiResponse(code = 200, message = "Received comments for answers are displayed"),
             @ApiResponse(code = 404, message = "Answer can not be found, " +
                     "change the answer ID")})
-    @PostMapping("/toAnswer/{answerId}")
-    public CommentToAnswerDTO saveCommentForAnswer(@RequestBody CommentToAnswerDTO commentToAnswerDTO, @PathVariable("answerId") int id){
-        return commentService.saveForAnswer(id, commentToAnswerDTO);
+    @PostMapping("/answer/{answerId}")
+    public CommentToAnswerDTO saveCommentForAnswer(@RequestBody CommentToAnswerDTO commentToAnswerDTO,@PathVariable("answerId") int answerId){
+        return commentService.saveForAnswer(answerId, commentToAnswerDTO);
     }
 
     @ApiOperation(
@@ -56,11 +54,7 @@ public class CommentController {
                     "change the comment ID")})
     @DeleteMapping("/{id}")
     public void deleteComment(@PathVariable("id") int id){
-        Comment comment = commentRepository.getById(id);
-        comment.setQuestion(null);
-        comment.setUser(null);
-        comment.setAnswer(null);
-        commentRepository.delete(comment);
+        commentService.delete(id);
     }
 
     @ApiOperation(
@@ -72,11 +66,8 @@ public class CommentController {
             @ApiResponse(code = 400, message = "Comment cannot be found, change the comment ID")
     })
     @PutMapping("/{id}/votes/like")
-    public int voteU(@PathVariable("id") int id){
-        Comment comment = commentRepository.getById(id);
-        comment.setVote(comment.getVote() + 1);
-        commentRepository.save(comment);
-        return comment.getVote();
+    public int like(@PathVariable("id") int id){
+        return commentService.like(id);
     }
 
     @ApiOperation(
@@ -88,10 +79,17 @@ public class CommentController {
             @ApiResponse(code = 400, message = "Comment cannot be found, change the comment ID")
     })
     @PutMapping("/{id}/votes/dislike")
-    public int voteD(@PathVariable("id") int id){
-        Comment comment = commentRepository.getById(id);
-        comment.setVote(comment.getVote() - 1);
-        commentRepository.save(comment);
-        return comment.getVote();
+    public int dislike(@PathVariable("id") int id){
+        return commentService.dislike(id);
+    }
+
+    @PutMapping("/answers/edit/{commentId}")
+    public CommentToAnswerDTO updateCommentForAnswer(@PathVariable("commentId") int id, CommentToAnswerDTO commentToAnswerDTO){
+        return commentService.updateCommentForAnswer(id, commentToAnswerDTO);
+    }
+
+    @PutMapping("/edit/{commentId}")
+    public CommentToQuestionDTO updateCommentForQuestion(@PathVariable("commentId") int id, CommentToQuestionDTO commentToQuestionDTO){
+        return commentService.updateCommentForQuestion(id, commentToQuestionDTO);
     }
 }

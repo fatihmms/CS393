@@ -1,6 +1,7 @@
 package com.group1.termproject.controller;
 
 import com.group1.termproject.DTO.QuestionDTO;
+import com.group1.termproject.DTO.QuestionDetailedDTO;
 import com.group1.termproject.DTO.QuestionPostDTO;
 import com.group1.termproject.mapper.QuestionMapper;
 import com.group1.termproject.model.Question;
@@ -24,7 +25,6 @@ public class QuestionController {
     @Autowired
     QuestionService questionService;
 
-    QuestionMapper questionMapper;
 
     @Autowired
     QuestionRepository questionRepository;
@@ -33,9 +33,9 @@ public class QuestionController {
             value = "Saves a new question",
             notes = "Write the necessary properties for a question")
     @ApiResponse(code = 200, message = "Question is saved")
-    @PostMapping("{userId}")
-    public QuestionPostDTO saveQuestion(@PathVariable("userId") int id, @RequestBody QuestionPostDTO q){
-        return questionService.save(id, q);
+    @PostMapping("/ask")
+    public QuestionPostDTO saveQuestion(@RequestBody QuestionPostDTO q){
+        return questionService.save(q);
     }
 
     @ApiOperation(
@@ -52,41 +52,60 @@ public class QuestionController {
             value = "Display questions by their tags",
             notes = "All submitted questions are showed by their tags")
     @ApiResponse(code = 200, message = "Questions by tags displayed")
-    @GetMapping("/{tag}")
-    public List<QuestionDTO> getByTag(@PathVariable("tag") String tag){
-        List<Question> questions = questionService.findByTag(tag);
-        return questionService.questionToDto(questions);
+    @GetMapping("/tagged/{tags}")
+    @ResponseBody
+    public List<QuestionDTO> getByTag(@PathVariable("tags")  List<String> tags){
+        return questionService.findByTag(tags);
     }
 
     @ApiOperation(
             value = "Display questions by their IDs",
             notes = "Determine the needed question ID")
     @ApiResponse(code = 200, message = "Questions displayed")
-    @GetMapping("/getById/{id}")
-    public QuestionDTO getById(@PathVariable("id") int id){
-        Question q = questionService.getById(id);
-        return questionService.singleQuestionToDto(q);
+    @GetMapping("/id/{questionId}")
+    public QuestionDetailedDTO getById(@PathVariable("questionId") int id){
+        return questionService.singleQuestionToDto(id);
     }
 
     @ApiOperation(
             value = "Delete questions by their IDs",
             notes = "Specify the question ID will be deleted")
     @ApiResponse(code = 200, message = "Questions are deleted")
-    @DeleteMapping("deleteById/{id}")
-    public void deleteAnswer(@PathVariable("id") int id){
-        Question question = questionRepository.getById(id);
-        question.setAnswers(null);
-        question.setOwnerUser(null);
-        question.setComments(null);
-        questionRepository.deleteById(question.getId());
+    @DeleteMapping("/{questionId}")
+    public void deleteQuestion(@PathVariable("questionId") int id){
+        questionService.delete(id);
     }
 
     @ApiOperation(
             value = "Update the target question",
             notes = "Specify the question ID to be updated")
     @ApiResponse(code = 200, message = "Questions are updated")
-    @PutMapping("/{id}")
-    public Question updateQuestion(@PathVariable("id") int id, @RequestBody QuestionPostDTO questionPostDTO){
+    @PutMapping("/{questionId}")
+    public QuestionPostDTO updateQuestion(@PathVariable("questionId") int id, @RequestBody QuestionPostDTO questionPostDTO){
         return questionService.update(id, questionPostDTO);
+    }
+
+    @ApiOperation(
+            value = "Like the specified question",
+            notes = "Specify the question ID to be liked")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Question is disliked"),
+            @ApiResponse(code = 400, message = "Question cannot be found, change the question ID")
+    })
+    @PutMapping("/{questionId}/votes/like")
+    public int like(@PathVariable("questionId") int id){
+        return questionService.like(id);
+    }
+
+    @ApiOperation(
+            value = "Dislike the specified question",
+            notes = "Specify the question ID to be disliked")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Question is disliked"),
+            @ApiResponse(code = 400, message = "Question cannot be found, change the question ID")
+    })
+    @PutMapping("/{questionId}/votes/dislike")
+    public int dislike(@PathVariable("questionId") int id){
+        return questionService.dislike(id);
     }
 }

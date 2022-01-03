@@ -1,5 +1,7 @@
 package com.group1.termproject.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import javax.websocket.OnError;
 import java.util.Date;
@@ -14,15 +16,16 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @ElementCollection
     @Column(name = "TAG")
-    private String tag;
+    private List<String> tags;
 
     @Column(name = "TITLE")
     private String title;
 
     @Column(name = "DATE")
-    @Temporal(TemporalType.DATE)
-    private Date askedDate = new Date();
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date date = new Date();
 
     @Column(name = "VOTE", columnDefinition = "integer default 0 ")
     private int vote;
@@ -48,12 +51,12 @@ public class Question {
         this.id = id;
     }
 
-    public String getTag() {
-        return tag;
+    public List<String> getTags() {
+        return tags;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setTags(List<String> tags) {
+        this.tags = tags;
     }
 
     public String getTitle() {
@@ -64,12 +67,12 @@ public class Question {
         this.title = title;
     }
 
-    public Date getAskedDate() {
-        return askedDate;
+    public Date getDate() {
+        return date;
     }
 
-    public void setAskedDate(Date askedDate) {
-        this.askedDate = askedDate;
+    public void setDate(Date askedDate) {
+        this.date = date;
     }
 
     public String getDescription() {

@@ -2,16 +2,11 @@ package com.group1.termproject.DTO;
 
 public class CommentToQuestionDTO {
 
-    //private String commentedBy;
+    private String usernameOfWriter;
     private String context;
 
-    /*public String getCommentedBy() {
-        return commentedBy;
-    }
 
-    public void setCommentedBy(String commentedBy) {
-        this.commentedBy = commentedBy;
-    }*/
+
 
     public String getContext() {
         return context;
@@ -21,5 +16,11 @@ public class CommentToQuestionDTO {
         this.context = context;
     }
 
+    public String getUsernameOfWriter() {
+        return usernameOfWriter;
+    }
 
+    public void setUsernameOfWriter(String usernameOfWriter) {
+        this.usernameOfWriter = usernameOfWriter;
+    }
 }

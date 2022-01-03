@@ -7,7 +7,7 @@ public class UserDTO {
     private String name;
     private String surname;
     private String username;
-    //private Date date;
+
 
     public String getName() {
         return name;
@@ -33,11 +33,5 @@ public class UserDTO {
         this.username = username;
     }
 
-    /*public Date getDate() {
-        return date;
-    }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }*/
 }
