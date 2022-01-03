@@ -61,8 +61,10 @@ public class QuestionController {
     @ApiOperation(
             value = "Display questions by their IDs",
             notes = "Determine the needed question ID")
-    @ApiResponse(code = 200, message = "Questions displayed")
-    @GetMapping("/id/{questionId}")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Question is displayed"),
+            @ApiResponse(code = 404, message = "Question cannot be found, please change the question ID")
+    })@GetMapping("/{questionId}")
     public QuestionDetailedDTO getById(@PathVariable("questionId") int id){
         return questionService.singleQuestionToDto(id);
     }
@@ -70,7 +72,10 @@ public class QuestionController {
     @ApiOperation(
             value = "Delete questions by their IDs",
             notes = "Specify the question ID will be deleted")
-    @ApiResponse(code = 200, message = "Questions are deleted")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Questions are deleted"),
+            @ApiResponse(code = 400, message = "Question cannot be found, please change the question ID")
+    })
     @DeleteMapping("/{questionId}")
     public void deleteQuestion(@PathVariable("questionId") int id){
         questionService.delete(id);

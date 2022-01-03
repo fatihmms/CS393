@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/comment")
+@RequestMapping("/questions")
 @Api(value = "Comment")
 public class CommentController {
 
@@ -28,7 +28,7 @@ public class CommentController {
             @ApiResponse(code = 200, message = "Received comments for questions are displayed"),
             @ApiResponse(code = 404, message = "Question can not be found, " +
                     "change the question ID")})
-    @PostMapping("/question/{questionId}")
+    @PostMapping("/{questionId}/comment")
     public CommentToQuestionDTO saveCommentForQuestion(@PathVariable("questionId") int questionId,@RequestBody CommentToQuestionDTO commentToQuestionDTO){
         return commentService.saveForQuestion(questionId,commentToQuestionDTO);
     }
@@ -40,20 +40,20 @@ public class CommentController {
             @ApiResponse(code = 200, message = "Received comments for answers are displayed"),
             @ApiResponse(code = 404, message = "Answer can not be found, " +
                     "change the answer ID")})
-    @PostMapping("/answer/{answerId}")
+    @PostMapping("/answer/{answerId}/comment")
     public CommentToAnswerDTO saveCommentForAnswer(@RequestBody CommentToAnswerDTO commentToAnswerDTO,@PathVariable("answerId") int answerId){
         return commentService.saveForAnswer(answerId, commentToAnswerDTO);
     }
 
     @ApiOperation(
-            value = "Saves a new comment for an answer",
+            value = "Deletes specified comment for an answer",
             notes = "Returns 404 if the Comment ID is not valid")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Comment is deleted"),
             @ApiResponse(code = 404, message = "Comment can not be found, " +
                     "change the comment ID")})
-    @DeleteMapping("/{id}")
-    public void deleteComment(@PathVariable("id") int id){
+    @DeleteMapping("/comment/{commentId}")
+    public void deleteComment(@PathVariable("commentId") int id){
         commentService.delete(id);
     }
 
@@ -63,10 +63,10 @@ public class CommentController {
     )
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Comment is liked"),
-            @ApiResponse(code = 400, message = "Comment cannot be found, change the comment ID")
+            @ApiResponse(code = 404, message = "Comment cannot be found, change the comment ID")
     })
-    @PutMapping("/{id}/votes/like")
-    public int like(@PathVariable("id") int id){
+    @PutMapping("/comment/{commentId}/votes/like")
+    public int like(@PathVariable("commentId") int id){
         return commentService.like(id);
     }
 
@@ -76,19 +76,35 @@ public class CommentController {
     )
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Comment is disliked"),
-            @ApiResponse(code = 400, message = "Comment cannot be found, change the comment ID")
+            @ApiResponse(code = 404, message = "Comment cannot be found, change the comment ID")
     })
-    @PutMapping("/{id}/votes/dislike")
-    public int dislike(@PathVariable("id") int id){
+    @PutMapping("/comment/{commentId}/votes/dislike")
+    public int dislike(@PathVariable("commentId") int id){
         return commentService.dislike(id);
     }
 
-    @PutMapping("/answers/edit/{commentId}")
+    @ApiOperation(
+            value = "Updates a comment for an answer",
+            notes = "Specify the comment ID will be updated"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Comment is disliked"),
+            @ApiResponse(code = 404, message = "Comment cannot be found, change the comment ID")
+    })
+    @PutMapping("/answers/comment/{commentId}/edit/")
     public CommentToAnswerDTO updateCommentForAnswer(@PathVariable("commentId") int id, CommentToAnswerDTO commentToAnswerDTO){
         return commentService.updateCommentForAnswer(id, commentToAnswerDTO);
     }
 
-    @PutMapping("/edit/{commentId}")
+    @ApiOperation(
+            value = "Updates a comment for a question",
+            notes = "Specify the comment ID will be updated"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Comment is disliked"),
+            @ApiResponse(code = 404, message = "Comment cannot be found, change the comment ID")
+    })
+    @PutMapping("/comment/{commentId}/edit")
     public CommentToQuestionDTO updateCommentForQuestion(@PathVariable("commentId") int id, CommentToQuestionDTO commentToQuestionDTO){
         return commentService.updateCommentForQuestion(id, commentToQuestionDTO);
     }
