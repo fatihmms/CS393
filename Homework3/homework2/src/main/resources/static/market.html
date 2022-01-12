@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html  lang="en">
+<style>
+    table{
+        border-collapse: collapse;
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #purchaseButton{
+        margin-right: auto;
+        margin-left: 1065px;
+    }
+    #removeButton{
+        margin-left: 965px;
+    }
+
+    td, th{
+        border: 1px solid #cccccc;
+        padding: 8px;
+    }
+
+    th{
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    tr:nth-child(even){
+        background: #58ffbe;
+    }
+    tr:hover{
+        background: #366db8;
+        color: white;
+    }
+    #totalAmount{
+        margin-left: 950px;
+    }
+    img{
+        opacity: 0.5;
+    }
+
+</style>
+
+<head>
+    <title>CS393 Homework 3 Fatih Memis</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="functions.js" async></script>
+</head>
+
+<body>
+<div>
+<h1 style="font-weight: bold" align="center" >Welcome to Spring Market</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Buy</th>
+        </tr>
+        </thead>
+        <tbody id="tableData" >
+        </tbody>
+    </table>
+<h2 style="font-weight: bold" align="center">Your basket</h2>
+<button id="removeButton" onclick="removeSelectedItems()">Remove selected products</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Select</th>
+            </tr>
+        </thead>
+        <tbody id="cartData"></tbody>
+
+    </table>
+<p id="totalAmount">Total amount is: $0</p>
+<button id="purchaseButton" onclick="createOrder()">Purchase</button>
+</div>
+</body>
+
+</html>
